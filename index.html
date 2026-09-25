@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexCore Systems // Intern Sandbox (Greenroom)</title>
+  <meta name="description" content="Greenroom Phase 2 - Interactive workplace apprenticeship simulator. Simulated corporate work pressure, code review, and manager interactions for engineering apprentices.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="app-shell">
+
+    <!-- ============================================================ -->
+    <!-- ZONE 1: TOP GLOBAL NAVIGATION BAR                            -->
+    <!-- ============================================================ -->
+    <header id="top-nav">
+
+      <!-- Left: Brand -->
+      <div class="nav-brand">
+        <div class="nav-brand-icon">A</div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-title">ApexCore Systems // Intern Sandbox (Greenroom)</span>
+          <span class="nav-brand-subtitle">Scenario: Day 1 - Broken Auth Middleware Hotfix</span>
+        </div>
+      </div>
+
+      <!-- Center: Ticket Info -->
+      <div class="nav-center">
+        <span class="ticket-id">TICKET: APX-104</span>
+        <span class="separator">|</span>
+        <span class="severity">SEVERITY: P0 BLOCKER</span>
+        <span class="separator">|</span>
+        <span class="status-text" id="ticket-status">IN PROGRESS</span>
+      </div>
+
+      <!-- Right: Status Badges -->
+      <div class="nav-right">
+        <div class="badge-box">Phase: <span class="value">Sprint 1</span></div>
+
+        <div class="timer-box">
+          <span class="label">REMAINING:</span>
+          <span class="countdown normal" id="countdown-value">28:35</span>
+        </div>
+
+        <div class="patience-container">
+          <div class="patience-header">
+            <span class="label">Manager Patience:</span>
+            <span class="value" id="patience-value" style="color: #D97706;">72%</span>
+          </div>
+          <div class="patience-track">
+            <div class="patience-fill" id="patience-fill" style="width: 72%; background-color: #D97706;"></div>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTAINER: SIDEBAR + WORKSPACE                          -->
+    <!-- ============================================================ -->
+    <div id="main-container">
+
+      <!-- ============================================================ -->
+      <!-- ZONE 2: LEFT SIDEBAR / ACTIVITY RAIL                         -->
+      <!-- ============================================================ -->
+      <aside id="sidebar">
+
+        <div>
+          <!-- Apprentice Profile -->
+          <div class="sidebar-profile">
+            <div class="label">Assigned Apprentice</div>
+            <div class="name">Alex Chen</div>
+            <div class="role">
+              <span class="online-dot"></span>
+              <span>SWE Intern // Backend Core</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section-label">Apprenticeship Console</div>
+
+          <!-- Tab Navigation -->
+          <nav>
+            <button class="nav-tab-btn" data-tab="inbox" id="tab-btn-inbox">
+              <span class="tab-left">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="2" y="3" width="12" height="10"></rect>
+                  <path d="M2 9h3.5l1.5 2h2l1.5-2H14"></path>
+                </svg>
+                <span>Corporate Inbox</span>
+              </span>
+              <span class="badge" id="inbox-badge">2 unread</span>
+            </button>
+
+            <button class="nav-tab-btn active" data-tab="chat" id="tab-btn-chat">
+              <span class="tab-left">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="2" y="2" width="12" height="9"></rect>
+                  <path d="M4 11v3l3-3"></path>
+                </svg>
+                <span>Team Chat (Slack/Teams)</span>
+              </span>
+              <span>
+                <span class="chat-ping-badge" id="chat-ping-badge">1</span>
+                <span class="online-indicator" title="Manager Online"></span>
+              </span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="workspace" id="tab-btn-workspace">
+              <span class="tab-left">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="2" y="2" width="12" height="12"></rect>
+                  <path d="M6 5l-2 3 2 3"></path>
+                  <path d="M10 5l2 3-2 3"></path>
+                </svg>
+                <span>Task Workspace & Diff</span>
+              </span>
+              <span class="ticket-label">APX-104</span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="eval" id="tab-btn-eval">
+              <span class="tab-left">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="3" y="2" width="10" height="12"></rect>
+                  <line x1="5" y1="5" x2="11" y2="5"></line>
+                  <line x1="5" y1="8" x2="11" y2="8"></line>
+                  <line x1="5" y1="11" x2="9" y2="11"></line>
+                </svg>
+                <span>Manager Evaluation Log</span>
+              </span>
+              <span class="score-readout" id="eval-score-readout">76%</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+          <div>ENVIRONMENT: STAGING-EAST</div>
+          <div>NODE VER: 20.12.0 // STRICT</div>
+          <div class="status-line">Status: <span id="sidebar-status-text">HOTFIX IN PROGRESS</span></div>
+          <div class="demo-hints">
+            <span class="demo-tag" id="demo-tag-label">[DEMO SHORTCUTS]</span>
+            <span class="demo-keys" title="Ctrl+Shift+0: Run Diagnostic Audit&#10;Ctrl+Shift+1: Auto-fill hotfix&#10;Ctrl+Shift+2: War room alert&#10;Ctrl+Shift+3: Force pass tests&#10;Ctrl+Shift+4: Open Debrief">Ctrl+Shift+0..4</span>
+          </div>
+          <button class="btn-demo-trigger" id="btn-demo-menu" title="Click to view presentation shortcuts">[PRESENTATION CONTROLS]</button>
+          <div class="version-watermark">Greenroom v1.0.0-rc // Horizon Hackathon Release</div>
+        </div>
+
+      </aside>
+
+      <!-- ============================================================ -->
+      <!-- ZONE 3: MAIN WORKSPACE                                       -->
+      <!-- ============================================================ -->
+      <div id="workspace">
+
+        <!-- ========================================================== -->
+        <!-- TAB A: TEAM CHAT                                            -->
+        <!-- ========================================================== -->
+        <div class="tab-panel active" id="panel-chat">
+
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-header-left">
+              <div class="chat-avatar">VM</div>
+              <div class="chat-header-info">
+                <div class="manager-name">
+                  <span>Vikram Malhotra (Lead Architect)</span>
+                  <span class="dm-tag">direct message</span>
+                </div>
+                <div class="manager-status">
+                  <span class="status-dot"></span>
+                  <span>In a meeting - review pending</span>
+                </div>
+              </div>
+            </div>
+            <div class="chat-header-right">CHANNEL: #auth-core-incidents</div>
+          </div>
+
+          <!-- Chat Message Feed -->
+          <div class="chat-feed" id="chat-feed">
+            <!-- Rendered by app.js -->
+          </div>
+
+          <!-- Typing Indicator -->
+          <div class="typing-indicator" id="typing-indicator">
+            <span class="pulse-dot"></span>
+            <span>Vikram Malhotra is typing reply...</span>
+          </div>
+
+          <!-- Input Area -->
+          <div class="chat-input-area">
+            <div class="chips-label">Standard Apprenticeship Status Updates (Quick Dispatch):</div>
+            <div class="chips-row" id="chips-row">
+              <button class="response-chip" data-message="Drafting the PR now">"Drafting the PR now"</button>
+              <button class="response-chip" data-message="Need access to staging logs">"Need access to staging logs"</button>
+              <button class="response-chip" data-message="Pushed hotfix to branch">"Pushed hotfix to branch"</button>
+            </div>
+            <div class="interrupt-chips-row" id="interrupt-chips" style="display:none;"></div>
+            <div class="chat-input-row">
+              <input type="text" class="chat-text-input" id="chat-input" placeholder="Type status report to Vikram Malhotra... (Press Enter to dispatch)">
+              <button class="btn-dispatch" id="btn-chat-dispatch">
+                <span>DISPATCH</span>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 1l14 7-14 7 2-7-2-7zm3 6h7l-7-1v1z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- TAB B: CORPORATE INBOX                                      -->
+        <!-- ========================================================== -->
+        <div class="tab-panel" id="panel-inbox">
+          <div class="inbox-container">
+
+            <!-- Email List -->
+            <div class="inbox-list">
+              <div class="inbox-list-header">
+                <span class="title">INBOX FOLDER</span>
+                <span class="count">3 messages</span>
+              </div>
+              <div class="inbox-list-items" id="inbox-items">
+                <!-- Rendered by app.js -->
+              </div>
+            </div>
+
+            <!-- Email Detail Pane -->
+            <div class="email-detail" id="email-detail-content">
+              <!-- Rendered by app.js -->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- TAB C: TASK WORKSPACE & CODE DIFF                           -->
+        <!-- ========================================================== -->
+        <div class="tab-panel" id="panel-workspace">
+
+          <!-- Workspace Toolbar -->
+          <div class="workspace-toolbar">
+            <div class="workspace-toolbar-left">
+              <span class="ticket-label">TASK APX-104:</span>
+              <span class="file-path">/src/middleware/auth.js</span>
+              <span class="branch-label">// branch: fix/apx-104-token-null-check</span>
+            </div>
+            <div class="workspace-toolbar-right">
+              <button class="btn-toolbar" id="btn-view-staging-logs">[VIEW STAGING LOGS]</button>
+              <button class="btn-toolbar" id="btn-toggle-diff">[DIFF HIGHLIGHTER]</button>
+              <button class="btn-toolbar" id="btn-load-patch">[LOAD RECOMMENDED PATCH]</button>
+              <button class="btn-toolbar" id="btn-reset-flawed">[RESET TO FLAWED PROD]</button>
+            </div>
+          </div>
+
+          <!-- Split Editor -->
+          <div class="editor-split">
+
+            <!-- Left Pane: Original Code (Read-Only) -->
+            <div class="editor-pane">
+              <div class="editor-pane-header">
+                <span>ORIGINAL CODE (VULNERABLE)</span>
+                <span class="status-vulnerable">[VULNERABLE]</span>
+              </div>
+              <div class="editor-code-display" id="original-code-display">
+                <!-- Rendered by app.js with line numbers -->
+              </div>
+              <div class="editor-pane-footer">
+                <span class="defect-note">DEFECT: Unhandled TypeError if req.headers['authorization'] is undefined.</span>
+              </div>
+            </div>
+
+            <!-- Right Pane: Intern Editor (Editable) -->
+            <div class="editor-pane">
+              <div class="editor-pane-header">
+                <span>YOUR HOTFIX (EDITABLE)</span>
+                <span class="status-working">[WORKING COPY]</span>
+              </div>
+              <div class="editor-textarea-wrapper">
+                <textarea class="editor-textarea" id="intern-editor" spellcheck="false"></textarea>
+                <div class="diff-highlight-display" id="diff-highlight-display" style="display: none;"></div>
+              </div>
+              <div class="editor-pane-footer">
+                <span class="guideline-note">GUIDELINE: Return HTTP 401 on missing Bearer token.</span>
+                <span class="line-count" id="intern-line-count">LINES: 8</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Test Console -->
+          <div class="test-console">
+            <div class="test-console-header">
+              <div class="suite-info">
+                <span class="suite-label">TEST SUITE RUNNER:</span>
+                <span class="suite-file">test/unit/authMiddleware.spec.js</span>
+              </div>
+              <div class="test-console-actions">
+                <button class="btn-run-tests" id="btn-run-tests">RUN LOCAL TESTS</button>
+                <button class="btn-submit-pr" id="btn-submit-pr" disabled>SUBMIT PR TO VIKRAM (LEAD)</button>
+              </div>
+            </div>
+            <div class="test-output" id="test-output">
+              <!-- Rendered by app.js -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- TAB D: MANAGER EVALUATION LOG                               -->
+        <!-- ========================================================== -->
+        <div class="tab-panel" id="panel-eval">
+          <div class="eval-container">
+
+            <!-- Scorecard -->
+            <div class="eval-scorecard">
+              <div class="eval-scorecard-header">
+                <div>
+                  <div class="section-label">PERFORMANCE TELEMETRY DASHBOARD</div>
+                  <h2>Vikram Malhotra's Live Evaluation Rubric</h2>
+                </div>
+                <div>
+                  <div class="composite-label">COMPOSITE APPRENTICE INDEX</div>
+                  <div class="composite-value" id="eval-composite">76%</div>
+                </div>
+              </div>
+
+              <div class="eval-telemetry-header">
+                <span class="telem-label">Live Apprentice Telemetry Feed</span>
+                <span class="telem-live"><span class="live-dot"></span> STREAMING</span>
+              </div>
+
+              <div class="eval-grid">
+
+                <!-- Criterion 1: Technical Rigor & Null Safety -->
+                <div class="eval-criterion">
+                  <div class="eval-criterion-header">
+                    <span class="criterion-name">1. Technical Rigor & Null-Safety</span>
+                    <span class="criterion-value" id="eval-tech-value">80%</span>
+                  </div>
+                  <div class="eval-bar-track">
+                    <div class="eval-bar-fill emerald" id="eval-tech-fill" style="width: 80%;"></div>
+                  </div>
+                  <div class="eval-criterion-note">Evaluates PR handling of undefined/null headers, clean early returns vs messy try-catch.</div>
+                </div>
+
+                <!-- Criterion 2: Professional Communication -->
+                <div class="eval-criterion">
+                  <div class="eval-criterion-header">
+                    <span class="criterion-name">2. Professional Communication</span>
+                    <span class="criterion-value" id="eval-response-value">65%</span>
+                  </div>
+                  <div class="eval-bar-track">
+                    <div class="eval-bar-fill amber" id="eval-response-fill" style="width: 65%;"></div>
+                  </div>
+                  <div class="eval-criterion-note">Response time to Vikram's pings, usage of enterprise status chips, concise status dispatch.</div>
+                </div>
+
+                <!-- Criterion 3: Production Urgency & SLA -->
+                <div class="eval-criterion">
+                  <div class="eval-criterion-header">
+                    <span class="criterion-name">3. Production Urgency & SLA</span>
+                    <span class="criterion-value" id="eval-communication-value">90%</span>
+                  </div>
+                  <div class="eval-bar-track">
+                    <div class="eval-bar-fill emerald" id="eval-communication-fill" style="width: 90%;"></div>
+                  </div>
+                  <div class="eval-criterion-note">Tracks speed from ticket intake to PR submission, SLA compliance under P0 severity.</div>
+                </div>
+
+                <!-- Criterion 4: Code Cleanliness & Security -->
+                <div class="eval-criterion">
+                  <div class="eval-criterion-header">
+                    <span class="criterion-name">4. Code Cleanliness & Security</span>
+                    <span class="criterion-value" id="eval-autonomy-value">70%</span>
+                  </div>
+                  <div class="eval-bar-track">
+                    <div class="eval-bar-fill amber" id="eval-autonomy-fill" style="width: 70%;"></div>
+                  </div>
+                  <div class="eval-criterion-note">Clean early returns, minimal diff scope, no messy try-catch wrappers, no leaked secrets.</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Audit Trail -->
+            <div class="audit-trail">
+              <div class="audit-trail-header">LIVE SUPERVISOR AUDIT FEED // SPRINT 1</div>
+              <div id="audit-trail-entries">
+                <!-- Rendered by app.js -->
+              </div>
+            </div>
+
+            <!-- Supervisor Note -->
+            <div class="supervisor-note">
+              <div class="note-header">OFFICIAL SUPERVISOR NOTE:</div>
+              <div class="note-body">"Alex shows solid core fundamentals. In enterprise production, defensive edge-case handling on unverified inputs is non-negotiable. P0 incidents require swift, concise status dispatches and verifiable test diffs."</div>
+              <div class="note-attribution">- Vikram Malhotra, Lead Architect & Systems Mentor (ApexCore Systems)</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PR SUBMISSION MODAL                                            -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="pr-modal">
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+        <span class="title">CONFIRM PULL REQUEST SUBMISSION</span>
+        <button class="modal-close" id="modal-close-btn">[CLOSE]</button>
+      </div>
+
+      <div class="modal-meta">
+        <div>Repository: <span class="val">apexcore/auth-gateway</span></div>
+        <div>Target Branch: <span class="val">staging-v2.14</span> &lt;-- <span class="branch">fix/apx-104-token-null-check</span></div>
+        <div>Reviewer: <span class="val">Vikram Malhotra (Lead Architect)</span></div>
+      </div>
+
+      <div class="modal-diff">
+        <div class="diff-comment">// Diff Summary:</div>
+        <div class="diff-del">- const token = authHeader.split(' ')[1];</div>
+        <div class="diff-add">+ if (!authHeader || typeof authHeader !== 'string') return res.status(401).json(...);</div>
+        <div class="diff-add">+ if (!authHeader.startsWith('Bearer ')) return res.status(401).json(...);</div>
+        <div class="diff-add">+ const token = authHeader.split(' ')[1];</div>
+      </div>
+
+      <div class="modal-validation pass" id="modal-validation">
+        [VALIDATION PASSED] Unit suite passes 3/3 assertions. Ready for merge.
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" id="modal-cancel-btn">CANCEL & REVIEW</button>
+        <button class="btn-modal-confirm" id="modal-confirm-btn">DISPATCH PR TO VIKRAM MALHOTRA</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- STAGING LOGS MODAL                                             -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay staging-logs-modal" id="staging-logs-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="title">STAGING SERVER LOGS // US-EAST-1 AUTH GATEWAY</span>
+        <button class="modal-close" id="staging-logs-close">[CLOSE]</button>
+      </div>
+      <div class="staging-logs-body" id="staging-logs-body">
+        <!-- Rendered by app.js -->
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" id="staging-logs-dismiss">DISMISS</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SPRINT DEBRIEF MODAL                                           -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay debrief-modal" id="debrief-modal">
+    <div class="modal-dialog">
+      <div class="modal-header" style="justify-content: flex-end; padding: 2px 6px; border-bottom: none; margin-bottom: -10px;">
+        <button class="modal-close" id="debrief-close-btn">[CLOSE]</button>
+      </div>
+      <div class="debrief-header-block">
+        <div class="org-name">ApexCore Systems // Apprenticeship Assessment Division</div>
+        <div class="report-title">APPRENTICESHIP ASSESSMENT REPORT</div>
+        <div class="apprentice-name">Candidate: Alex Chen (Software Engineering Intern)</div>
+      </div>
+
+      <div class="debrief-grade-box" id="debrief-grade-box">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="debrief-section" id="debrief-metrics">
+        <div class="section-title">Performance Metrics Breakdown</div>
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="debrief-section" id="debrief-findings">
+        <div class="section-title">Strengths & Vulnerabilities Assessment</div>
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="debrief-actions">
+        <button class="btn-debrief btn-debrief-export" id="debrief-export">DOWNLOAD PERFORMANCE RECORD</button>
+        <button class="btn-debrief btn-debrief-restart" id="debrief-restart">RESTART SCENARIO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- INCIDENT ESCALATION MODAL (PATIENCE DEPLETED)               -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay escalation-modal" id="escalation-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="title">INCIDENT ESCALATION // SUPERVISOR INTERVENTION</span>
+        <button class="modal-close" id="escalation-close-btn">[CLOSE]</button>
+      </div>
+      <div class="escalation-body">
+        <div class="escalation-alert-badge">[CRITICAL SLA BREACH // PATIENCE DEPLETED: 0%]</div>
+        <p class="escalation-text">
+          Ticket <strong>APX-104 (P0 Blocker)</strong> has been stripped from intern Alex Chen and reassigned to Senior Staff Engineer <strong>Marcus Vance</strong> to halt ongoing staging downtime.
+        </p>
+        <div class="escalation-quote">
+          "We gave the apprentice adequate runway to diagnose the null pointer and patch the Bearer schema. Continued silence and unverified test iterations have compromised our SLA delivery window."
+          <div class="quote-author">— Vikram Malhotra, Lead Architect & Systems Mentor</div>
+        </div>
+        <div class="escalation-recommendation">
+          Recommendation: Review your live supervisory audit telemetry to understand where communication or technical verification stalled, or restart the simulation from Day 1.
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" id="btn-escalation-review">REVIEW TELEMETRY &gt;&gt;</button>
+        <button class="btn-modal-confirm" id="btn-escalation-restart">RESTART SCENARIO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PRESENTATION CONTROLS (HACKATHON DEMO MODAL)                -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay demo-modal" id="demo-modal">
+    <div class="modal-dialog" style="max-width: 560px;">
+      <div class="modal-header">
+        <span class="title">HACKATHON PRESENTATION TOOLING // DEMO CONTROLS</span>
+        <button class="modal-close" id="demo-modal-close">[CLOSE]</button>
+      </div>
+      <div class="staging-logs-body" style="max-height: none; font-size: 12px; line-height: 1.8;">
+        <div style="color: var(--amber-spotlight); font-weight: 700; margin-bottom: 8px;">LIVE DEMO KEYBOARD SHORTCUTS:</div>
+        <div><span style="color: var(--amber-spotlight); font-weight: 700;">Ctrl + Shift + 0:</span> Run Pre-Flight Diagnostic Self-Test (5-check audit)</div>
+        <div><span style="color: var(--emerald-text); font-weight: 700;">Ctrl + Shift + 1:</span> Pre-fill recommended hotfix code into editor</div>
+        <div><span style="color: var(--emerald-text); font-weight: 700;">Ctrl + Shift + 2:</span> Trigger Mid-Sprint War Room Interruption alert</div>
+        <div><span style="color: var(--emerald-text); font-weight: 700;">Ctrl + Shift + 3:</span> Force unit test suite to pass & unlock PR submit</div>
+        <div><span style="color: var(--emerald-text); font-weight: 700;">Ctrl + Shift + 4:</span> Open final Apprentice Assessment Report modal</div>
+        <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--border-dark-subtle); color: var(--text-light-muted); font-size: 11px;">
+          Note: Shortcuts work globally from any tab without interfering with code editing.
+        </div>
+      </div>
+      <div class="modal-actions" style="flex-wrap: wrap; gap: 8px;">
+        <button class="btn-modal-cancel" id="demo-act-audit" style="border-color: var(--amber-spotlight); color: var(--amber-spotlight);">[0] RUN AUDIT</button>
+        <button class="btn-modal-cancel" id="demo-act-fix">[1] AUTO-FILL FIX</button>
+        <button class="btn-modal-cancel" id="demo-act-ping">[2] WAR ROOM PING</button>
+        <button class="btn-modal-cancel" id="demo-act-pass">[3] PASS TESTS</button>
+        <button class="btn-modal-cancel" id="demo-act-debrief">[4] OPEN DEBRIEF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PRE-FLIGHT DIAGNOSTIC HUD MODAL (Ctrl + Shift + 0)          -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay diagnostic-modal" id="diagnostic-modal">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <div class="modal-header">
+        <span class="title">APEXCORE PRE-FLIGHT DIAGNOSTIC & SELF-TEST RUNNER</span>
+        <button class="modal-close" id="diagnostic-close-btn">[CLOSE]</button>
+      </div>
+      <div class="diagnostic-body" id="diagnostic-body">
+        <div class="diagnostic-header-bar">
+          <span class="diag-suite-name">AUTOMATED SELF-TEST HARNESS // 5 ENGINE CHECKS</span>
+          <span class="diag-status-badge pass" id="diag-summary-badge">[HEALTH: 100%]</span>
+        </div>
+        <div class="diagnostic-checklist" id="diagnostic-checklist">
+          <!-- Populated dynamically by runGreenroomAudit() -->
+        </div>
+        <div class="diagnostic-banner" id="diagnostic-banner">
+          APEXCORE SANDBOX ENGINE HEALTH: 100% // READY FOR HORIZON DEMO
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" id="diagnostic-rerun-btn">RE-RUN DIAGNOSTIC SUITE</button>
+        <button class="btn-modal-confirm" id="diagnostic-dismiss-btn">DISMISS AUDIT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Engine -->
+  <script src="app.js"></script>
+
+</body>
+</html>

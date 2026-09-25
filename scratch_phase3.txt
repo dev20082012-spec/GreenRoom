@@ -1,0 +1,58 @@
+<USER_REQUEST>
+Implement Phase 3 of "Greenroom" into our existing files (`index.html`, `styles.css`, and `app.js`).
+
+Phase 1 established the UI layout, and Phase 2 wired the tabs and core diff editor. Phase 3 is the intelligence and evaluation layer that converts the sandbox into a complete, judge-ready apprentice simulation.
+
+Implement the following five features using clean Vanilla JavaScript and CSS:
+
+### 1. Tab 4: Dynamic Manager Evaluation Log & Live Telemetry
+- Build out the fourth sidebar tab ("Manager Evaluation Log") into an enterprise performance audit dashboard:
+  - 4 Key Metrics with progress bars and dynamic score ratings:
+    1. Technical Rigor & Null-Safety (evaluates whether the PR handled undefined/null headers)
+    2. Professional Communication (scores response time to Vikram's pings and usage of enterprise status chips)
+    3. Production Urgency & SLA (tracks speed from ticket intake to PR submission)
+    4. Code Cleanliness & Security (checks for clean early returns vs. messy try-catch wrappers)
+  - Live "Supervisor Audit Feed": A real-time timeline logging apprentice actions with timestamps (e.g., "[09:16 AM] Apprentice inspected APX-104 stack trace", "[09:21 AM] Test Suite run failed: missing edge case", "[09:24 AM] Hotfix PR #249 dispatched to staging-east").
+
+### 2. Tab 3 Upgrade: Enterprise Staging Logs Modal & Inline Diff Highlighter
+- Inside the Task Workspace, add a "View Staging Server Logs" secondary button:
+  - Opens a clean monospace terminal modal showing realistic Node.js/Express production logs:
+    - `[INFO] 2026-09-25T09:14:02Z Worker-04: GET /api/v1/user/profile - 500 Internal Server Error`
+    - `TypeError: Cannot read properties of undefined (reading 'split') at authMiddleware (/src/middleware/auth.js:14:28)`
+    - `[WARN] 2026-09-25T09:14:03Z CircuitBreaker: Staging Auth cluster degraded`
+  - Allows the apprentice to cross-reference real logs before writing code.
+- Provide a "Diff Highlighter" mode in the hotfix editor showing red strikethroughs for d
+<truncated 793 bytes>
+Toasts
+- Use the HTML5 Web Audio API (synthesized sine/triangle oscillator waves, no external mp3 assets) to trigger subtle, enterprise-grade audio feedback:
+  - Subtle click/chime on message dispatch and incoming Slack ping.
+  - Success two-tone chord when local test suite passes (100% green).
+  - Subtle error buzz when tests fail or patience drops below 30%.
+- Enterprise Toast Notification component: Pops up at top-right for system events ("Staging deploy initiated", "Manager Patience -5%", "Branch synced").
+
+### 5. Sprint Debrief & Hiring Readiness Scorecard (End Game Modal)
+- When the user successfully merges the PR or the countdown timer hits 0:
+  - Open a comprehensive "ApexCore Apprenticeship Assessment Report" modal:
+    - Overall Grade: e.g., "Ready for Staging Deployment (Level: Associate L1)".
+    - Strengths & Vulnerabilities summary generated from actual gameplay decisions.
+    - Export / Share button: "Download Apprentice Performance Record" (generates a formatted print/copy view).
+    - "Restart Scenario" button to reset state.
+
+### Design Integrity
+- Maintain the established aesthetic: strict backstage green (#122B1E), spotlight amber (#D97706), warm off-white (#F8F7F2), sharp borders, and zero generic gradients or glassmorphism.
+- Ensure all states remain tightly bound to `window.GreenroomEngine` so switching tabs or closing modals retains all user input and scores.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-25T20:46:30+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\omen\GreenRoom\index.html (LANGUAGE_HTML)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\omen\GreenRoom\index.html (LANGUAGE_HTML)
+- c:\Users\omen\GreenRoom\app.js (LANGUAGE_JAVASCRIPT)
+- c:\Users\omen\GreenRoom\styles.css (LANGUAGE_CSS)
+Browser State:
+  Page 1BF28FE93CF7DC6E169AC5B0B3A91862 (ApexCore Systems // Intern Sandbox (Greenroom)) - file:///C:/Users/omen/GreenRoom/index.html [ACTIVE]
+    Viewport: 1536x730, Page Height: 729
+</ADDITIONAL_METADATA>
