@@ -1,10 +1,4 @@
-/* ================================================================
-   Greenroom Phase 2 - Enterprise Intranet Design System
-   Strict adherence: No harsh gradients, no drop shadows,
-   no glassmorphism, no emojis, no em dashes, no rounded pills,
-   no neon, no Inter/Geist/Space Grotesk, no hover animations,
-   no liquid glass, no bento grids, no dot grids, no sparkle icons.
-   ================================================================ */
+﻿
 
 :root {
   --bg-primary: #122B1E;
@@ -42,7 +36,6 @@
   --code-header: #132A1F;
 }
 
-/* ---- RESET ---- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -94,15 +87,10 @@ textarea {
   resize: none;
 }
 
-/* ---- SCROLLBAR ---- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-surface-alt); }
 ::-webkit-scrollbar-thumb { background: var(--border-dark); }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-light-muted); }
-
-/* ================================================================
-   LAYOUT SHELL
-   ================================================================ */
 
 #app-shell {
   display: flex;
@@ -112,7 +100,6 @@ textarea {
   overflow: hidden;
 }
 
-/* ---- TOP NAV BAR ---- */
 #top-nav {
   height: 56px;
   min-height: 56px;
@@ -254,14 +241,12 @@ textarea {
   transition: width 0.4s ease, background-color 0.4s ease;
 }
 
-/* ---- MAIN CONTAINER ---- */
 #main-container {
   display: flex;
   flex: 1;
   overflow: hidden;
 }
 
-/* ---- LEFT SIDEBAR ---- */
 #sidebar {
   width: 240px;
   min-width: 240px;
@@ -318,7 +303,6 @@ textarea {
   color: var(--text-light-muted);
 }
 
-/* ---- SIDEBAR NAV BUTTONS ---- */
 .nav-tab-btn {
   text-align: left;
   border-bottom: 1px solid var(--border-dark-subtle);
@@ -399,7 +383,6 @@ textarea {
   margin-top: 4px;
 }
 
-/* ---- WORKSPACE AREA ---- */
 #workspace {
   flex: 1;
   display: flex;
@@ -418,10 +401,6 @@ textarea {
 .tab-panel.active {
   display: flex;
 }
-
-/* ================================================================
-   TAB A: TEAM CHAT
-   ================================================================ */
 
 .chat-header {
   height: 48px;
@@ -494,7 +473,6 @@ textarea {
   text-align: right;
 }
 
-/* ---- CHAT FEED ---- */
 .chat-feed {
   flex: 1;
   padding: 16px;
@@ -577,7 +555,6 @@ textarea {
   50% { opacity: 0.3; }
 }
 
-/* ---- CHAT INPUT AREA ---- */
 .chat-input-area {
   background: var(--bg-surface);
   border-top: 1px solid var(--border-dark);
@@ -654,10 +631,6 @@ textarea {
 .btn-dispatch:hover {
   background: var(--amber-light);
 }
-
-/* ================================================================
-   TAB B: CORPORATE INBOX
-   ================================================================ */
 
 .inbox-container {
   display: flex;
@@ -789,7 +762,6 @@ textarea {
   padding: 1px 4px;
 }
 
-/* ---- EMAIL DETAIL PANE ---- */
 .email-detail {
   flex: 1;
   background: var(--bg-ivory);
@@ -883,10 +855,6 @@ textarea {
   white-space: pre-wrap;
 }
 
-/* ================================================================
-   TAB C: TASK WORKSPACE & CODE DIFF
-   ================================================================ */
-
 .workspace-toolbar {
   height: 40px;
   min-height: 40px;
@@ -940,7 +908,6 @@ textarea {
   color: var(--text-light-primary);
 }
 
-/* ---- SPLIT EDITOR ---- */
 .editor-split {
   flex: 1;
   display: grid;
@@ -1035,7 +1002,6 @@ textarea {
 .editor-pane-footer .guideline-note { color: var(--text-light-secondary); }
 .editor-pane-footer .line-count { color: var(--text-light-secondary); }
 
-/* ---- TEST CONSOLE ---- */
 .test-console {
   height: 176px;
   min-height: 176px;
@@ -1131,10 +1097,6 @@ textarea {
 .test-line-status-fail { color: var(--red-text); font-weight: 700; }
 .test-line-muted { color: var(--text-light-muted); }
 .test-line-running { color: var(--amber-spotlight); }
-
-/* ================================================================
-   TAB D: MANAGER EVALUATION LOG
-   ================================================================ */
 
 .eval-container {
   flex: 1;
@@ -1232,7 +1194,6 @@ textarea {
   margin-top: 6px;
 }
 
-/* ---- AUDIT TRAIL ---- */
 .audit-trail {
   border: 1px solid var(--border-dark);
   background: var(--bg-surface-alt);
@@ -1273,7 +1234,6 @@ textarea {
 .audit-entry .event { color: var(--text-light-primary); }
 .audit-entry .impact { color: var(--amber-spotlight); font-weight: 600; text-align: right; flex-shrink: 0; margin-left: 16px; }
 
-/* ---- SUPERVISOR NOTE ---- */
 .supervisor-note {
   border: 1px solid var(--border-dark);
   background: var(--bg-surface);
@@ -1298,10 +1258,6 @@ textarea {
   font-size: 10px;
   margin-top: 8px;
 }
-
-/* ================================================================
-   PR MODAL
-   ================================================================ */
 
 .modal-overlay {
   display: none;
@@ -1431,10 +1387,6 @@ textarea {
   background: var(--amber-light);
 }
 
-/* ================================================================
-   TOAST NOTIFICATION
-   ================================================================ */
-
 .toast-container {
   position: fixed;
   top: 64px;
@@ -1475,11 +1427,6 @@ textarea {
   font-size: 11px;
 }
 
-/* ================================================================
-   PHASE 3 ADDITIONS
-   ================================================================ */
-
-/* ---- STAGING LOGS MODAL ---- */
 .staging-logs-modal .modal-dialog {
   max-width: 720px;
 }
@@ -1501,7 +1448,6 @@ textarea {
 .log-line-warn { color: var(--amber-spotlight); }
 .log-line-trace { color: var(--text-light-muted); padding-left: 16px; }
 
-/* ---- DIFF HIGHLIGHTER IN EDITOR ---- */
 .diff-highlight-display {
   flex: 1;
   padding: 12px;
@@ -1540,13 +1486,11 @@ textarea {
   padding-left: 10px;
 }
 
-/* ---- WORKSPACE EXTRA BUTTONS ---- */
 .btn-toolbar.active-toggle {
   border-color: var(--amber-spotlight);
   color: var(--amber-spotlight);
 }
 
-/* ---- CHAT PING BADGE ---- */
 .chat-ping-badge {
   background: var(--crimson-alert);
   color: var(--text-light-primary);
@@ -1563,7 +1507,6 @@ textarea {
   display: inline-block;
 }
 
-/* ---- INTERRUPT CHIPS (injected dynamically) ---- */
 .interrupt-chips-row {
   display: flex;
   gap: 8px;
@@ -1587,7 +1530,6 @@ textarea {
   color: var(--text-light-primary);
 }
 
-/* ---- SPRINT DEBRIEF MODAL ---- */
 .debrief-modal .modal-dialog {
   max-width: 640px;
   max-height: 85vh;
@@ -1751,7 +1693,6 @@ textarea {
   background: var(--amber-light);
 }
 
-/* ---- EVAL TELEMETRY UPGRADE ---- */
 .eval-telemetry-header {
   display: flex;
   align-items: center;
@@ -1786,7 +1727,6 @@ textarea {
   animation: pulse-blink 1.2s ease-in-out infinite;
 }
 
-/* ---- PRINT STYLES FOR DEBRIEF EXPORT ---- */
 @media print {
   body {
     background: #ffffff;
@@ -1826,11 +1766,6 @@ textarea {
   }
 }
 
-/* ================================================================
-   PHASE 4 ADDITIONS: HARDENING & PRESENTATION POLISH
-   ================================================================ */
-
-/* ---- CUSTOM UNIFIED ENTERPRISE SCROLLBARS ---- */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border-dark) var(--bg-surface);
@@ -1858,7 +1793,6 @@ textarea {
   background: var(--bg-primary);
 }
 
-/* ---- LAYOUT HARDENING & MINIMUM BOUNDS ---- */
 body {
   min-width: 1024px;
 }
@@ -1868,7 +1802,6 @@ body {
   min-height: 640px;
 }
 
-/* ---- INCIDENT ESCALATION MODAL (PATIENCE DEPLETED) ---- */
 .escalation-modal .modal-dialog {
   max-width: 600px;
   border-color: var(--crimson-alert);
@@ -1927,7 +1860,6 @@ body {
   padding-top: 10px;
 }
 
-/* ---- DEMO PRESENTATION CONTROLS & HINTS ---- */
 .demo-hints {
   margin-top: 8px;
   padding-top: 6px;
@@ -1968,13 +1900,11 @@ body {
   color: var(--amber-spotlight);
 }
 
-/* ---- FROZEN / DISABLED INPUTS ON GAME OVER ---- */
 .inputs-frozen {
   pointer-events: none;
   opacity: 0.65;
 }
 
-/* ---- VERSION WATERMARK ---- */
 .version-watermark {
   margin-top: 6px;
   padding-top: 4px;
@@ -1986,9 +1916,6 @@ body {
   text-transform: uppercase;
 }
 
-/* ================================================================
-   PRE-FLIGHT DIAGNOSTIC HUD MODAL (Ctrl + Shift + 0)
-   ================================================================ */
 .diagnostic-modal .modal-dialog {
   max-width: 640px;
   border-color: var(--amber-spotlight);
@@ -2121,6 +2048,4 @@ body {
   color: var(--red-text);
   border-color: var(--crimson-alert);
 }
-
-
 

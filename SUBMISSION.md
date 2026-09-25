@@ -92,21 +92,38 @@ Greenroom is engineered strictly according to modern enterprise intranet constra
 
 ---
 
-## 6. How to Run Locally
+## 6. How to Run & Deploy
 
-### Option A: Direct Browser Launch (Simplest)
+### Option A: Live Web Service on Render (Recommended)
+This repository is pre-configured for instant **Render Web Service** deployment with zero build steps and automatic health checks:
+
+#### 1. Instant Blueprint Deployment
+1. Push this repository to GitHub or GitLab.
+2. In the [Render Dashboard](https://dashboard.render.com), click **New +** > **Blueprint**.
+3. Connect your repository. Render automatically reads [render.yaml](file:///c:/Users/omen/GreenRoom/render.yaml), configures the Web Service, sets the port binding, and points the health monitor to `/healthz`.
+4. Click **Apply**. Your app is live within 30 seconds!
+
+#### 2. Manual Web Service Creation on Render
+If configuring manually:
+- **Service Type**: Web Service
+- **Runtime**: `Node`
+- **Build Command**: *(leave blank or `npm run start`)*
+- **Start Command**: `node server.js`
+- **Health Check Path**: `/healthz`
+- **Plan**: Free
+
+### Option B: Local Node.js Production Web Service
+Run the built-in zero-dependency production server locally:
+```bash
+npm start
+# or: node server.js
+```
+The server will bind to `http://localhost:10000` (or `process.env.PORT`) with instant health-checking at `http://localhost:10000/healthz`.
+
+### Option C: Direct Browser Launch (Offline)
 1. Navigate to the repository root.
 2. Double-click [index.html](file:///c:/Users/omen/GreenRoom/index.html) in any modern browser (Chrome, Edge, Firefox, Safari).
-
-### Option B: Local Static Server
-```bash
-# Using Python 3
-python -m http.server 8080
-
-# Or using Node.js / npx
-npx serve .
 ```
-Then navigate to `http://localhost:8080`.
 
 ---
 

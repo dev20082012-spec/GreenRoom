@@ -1,22 +1,14 @@
-/* ================================================================
-   Greenroom Phase 4 - Centralized Apprenticeship Engine
-   Final QA, Hardening, Presentation Tooling & Evaluation Telemetry
-   Zero external dependencies. Pure vanilla JS & Web Audio API.
-   ================================================================ */
-
+﻿
 (function () {
   'use strict';
 
-  // ================================================================
-  // DEFECT SHIELD: GLOBAL SAFETY CATCHERS
-  // ================================================================
   window.onerror = function (message, source, lineno, colno, error) {
     try {
       if (typeof addAuditEntry === 'function') {
         addAuditEntry('Runtime Warning: ' + message, 'Defect Shield Active');
       }
     } catch (e) {}
-    return true; // suppresses browser error popup
+    return true;
   };
 
   window.onunhandledrejection = function (event) {
@@ -28,9 +20,6 @@
     if (event && event.preventDefault) event.preventDefault();
   };
 
-  // ================================================================
-  // SOUND SYSTEM (Pure Web Audio API - Zero external assets)
-  // ================================================================
   var audioCtx = null;
 
   function getAudioContext() {
@@ -49,7 +38,6 @@
   }
 
   var soundManager = {
-    // Subtle double-chime for incoming ping or message dispatch
     playChime: function () {
       var ctx = getAudioContext();
       if (!ctx) return;
@@ -79,13 +67,12 @@
       } catch (e) {}
     },
 
-    // Success chord (C5 - E5 - G5 arpeggio) when test suite passes
     playSuccess: function () {
       var ctx = getAudioContext();
       if (!ctx) return;
       try {
         var now = ctx.currentTime;
-        var freqs = [523.25, 659.25, 783.99]; // C5, E5, G5
+        var freqs = [523.25, 659.25, 783.99];
         freqs.forEach(function (f, idx) {
           var t = now + idx * 0.08;
           var osc = ctx.createOscillator();
@@ -102,7 +89,6 @@
       } catch (e) {}
     },
 
-    // Error tone (low filtered buzz) when tests fail or SLA penalty
     playError: function () {
       var ctx = getAudioContext();
       if (!ctx) return;
@@ -132,9 +118,6 @@
     }
   };
 
-  // ================================================================
-  // CONSTANTS: CODE TEMPLATES & PRODUCTION LOGS
-  // ================================================================
   var ORIGINAL_CODE =
     'function authMiddleware(req, res, next) {\n' +
     '  const authHeader = req.headers[\'authorization\'];\n' +
@@ -190,14 +173,11 @@
     { type: 'warn', text: '[WARN]  2026-09-25T09:14:22.610Z Gateway: Incoming unauthenticated traffic spike detected from client test harness.' }
   ];
 
-  // ================================================================
-  // INITIAL STATE DEFINITION
-  // ================================================================
   function getInitialState() {
     return {
       activeTab: 'chat',
       patienceScore: 72,
-      secondsRemaining: 1715, // ~28:35
+      secondsRemaining: 1715,
       ticketStatus: 'IN PROGRESS',
       unreadInboxCount: 2,
       testsRanOnce: false,
@@ -210,14 +190,12 @@
       diffMode: false,
       editorContent: ORIGINAL_CODE,
 
-      // Interruption Event State
       interruptTriggered: false,
       interruptPending: false,
       interruptAnswered: false,
       interruptSlaTimer: null,
       chatUnreadPing: 0,
 
-      // Rubric Metrics
       evalMetrics: {
         technicalAccuracy: 80,
         responseTime: 65,
@@ -225,7 +203,6 @@
         autonomy: 70
       },
 
-      // Gameplay Statistics for Debrief
       gameplayStats: {
         startTime: Date.now(),
         inspectedStagingLogs: false,
@@ -391,9 +368,6 @@
 
   var state = getInitialState();
 
-  // ================================================================
-  // UTILITY HELPERS
-  // ================================================================
   function $(sel) { return document.querySelector(sel); }
   function $$(sel) { return document.querySelectorAll(sel); }
 
@@ -430,9 +404,6 @@
     return hasNullGuard && hasBearerOrSplitGuard;
   }
 
-  // ================================================================
-  // AUDIT LOG HELPER
-  // ================================================================
   function addAuditEntry(event, impact) {
     state.evalAuditLog.unshift({
       time: nowTime(),
@@ -447,9 +418,6 @@
     }
   }
 
-  // ================================================================
-  // TOAST SYSTEM
-  // ================================================================
   function showToast(title, body) {
     var container = $('#toast-container');
     if (!container) return;
@@ -481,9 +449,6 @@
     }, 4500);
   }
 
-  // ================================================================
-  // DIFF HIGHLIGHTER ALGORITHM (LCS LINE-BY-LINE)
-  // ================================================================
   function computeLineDiff(origStr, newStr) {
     var origLines = origStr.split('\n');
     var newLines = newStr.split('\n');
@@ -584,9 +549,6 @@
     }
   }
 
-  // ================================================================
-  // STAGING LOGS MODAL
-  // ================================================================
   function openStagingLogsModal() {
     var modal = $('#staging-logs-modal');
     var body = $('#staging-logs-body');
@@ -615,9 +577,6 @@
     if (modal) modal.classList.remove('visible');
   }
 
-  // ================================================================
-  // AGENTIC MID-SPRINT INTERRUPTION EVENT
-  // ================================================================
   function triggerSprintInterruption() {
     if (state.isGameOver) return;
     state.interruptTriggered = true;
@@ -792,9 +751,6 @@
     renderChat();
   }
 
-  // ================================================================
-  // PATIENCE MANAGEMENT & INCIDENT ESCALATION
-  // ================================================================
   function applyPatienceDelta(delta) {
     state.patienceScore = clamp(state.patienceScore + delta, 0, 100);
     renderTopNav();
@@ -872,9 +828,6 @@
     if (chipsRow) chipsRow.classList.remove('inputs-frozen');
   }
 
-  // ================================================================
-  // RENDERING - TOP NAV
-  // ================================================================
   function renderTopNav() {
     var color = getPatienceColor(state.patienceScore);
     var countdownClass = state.secondsRemaining < 300 ? 'critical' : 'normal';
@@ -901,9 +854,6 @@
     }
   }
 
-  // ================================================================
-  // RENDERING - SIDEBAR
-  // ================================================================
   function renderSidebar() {
     $$('.nav-tab-btn').forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.tab === state.activeTab);
@@ -925,18 +875,12 @@
     if (scoreEl) scoreEl.textContent = composite + '%';
   }
 
-  // ================================================================
-  // RENDERING - TAB PANELS
-  // ================================================================
   function renderTabPanels() {
     $$('.tab-panel').forEach(function (panel) {
       panel.classList.toggle('active', panel.id === 'panel-' + state.activeTab);
     });
   }
 
-  // ================================================================
-  // RENDERING - CHAT
-  // ================================================================
   function renderChat() {
     var feed = $('#chat-feed');
     if (!feed) return;
@@ -970,9 +914,6 @@
     feed.scrollTop = feed.scrollHeight;
   }
 
-  // ================================================================
-  // RENDERING - INBOX
-  // ================================================================
   function renderInbox() {
     var list = $('#inbox-items');
     var detail = $('#email-detail-content');
@@ -1050,9 +991,6 @@
     }
   }
 
-  // ================================================================
-  // RENDERING - WORKSPACE
-  // ================================================================
   function renderWorkspace() {
     var display = $('#original-code-display');
     if (display) {
@@ -1106,9 +1044,6 @@
     container.scrollTop = container.scrollHeight;
   }
 
-  // ================================================================
-  // RENDERING - EVALUATION LOG & TELEMETRY
-  // ================================================================
   function renderEval() {
     var m = state.evalMetrics;
     var composite = Math.round((m.technicalAccuracy + m.responseTime + m.communicationProfessionalism + m.autonomy) / 4);
@@ -1150,9 +1085,6 @@
     }
   }
 
-  // ================================================================
-  // SPRINT DEBRIEF MODAL (End Game Scorecard)
-  // ================================================================
   function openDebriefModal() {
     var modal = $('#debrief-modal');
     if (!modal) return;
@@ -1247,9 +1179,6 @@
     if (modal) modal.classList.remove('visible');
   }
 
-  // ================================================================
-  // EXPORT PERFORMANCE RECORD (Clipboard + Printable Format)
-  // ================================================================
   function exportPerformanceRecord() {
     var m = state.evalMetrics;
     var composite = Math.round((m.technicalAccuracy + m.responseTime + m.communicationProfessionalism + m.autonomy) / 4);
@@ -1297,9 +1226,6 @@
     }
   }
 
-  // ================================================================
-  // SCENARIO RESET WORKFLOW
-  // ================================================================
   function restartScenario() {
     closeDebriefModal();
     closeEscalationModal();
@@ -1335,9 +1261,6 @@
     soundManager.playChime();
   }
 
-  // ================================================================
-  // MASTER RENDER
-  // ================================================================
   function render() {
     renderTopNav();
     renderSidebar();
@@ -1349,11 +1272,7 @@
     if (state.activeTab === 'eval') renderEval();
   }
 
-  // ================================================================
-  // TAB SWITCHING
-  // ================================================================
   function switchTab(tab) {
-    // Before switching, sync editor textarea value into state to guarantee no data loss
     var editor = $('#intern-editor');
     if (editor && state.activeTab === 'workspace') {
       state.editorContent = editor.value;
@@ -1378,9 +1297,6 @@
     render();
   }
 
-  // ================================================================
-  // CHAT ENGINE - SEND MESSAGE & MANAGER RESPONSE
-  // ================================================================
   var isDispatchThrottled = false;
 
   function sendChatMessage(text) {
@@ -1473,9 +1389,6 @@
     }, 1300);
   }
 
-  // ================================================================
-  // TEST RUNNER ENGINE
-  // ================================================================
   function runTests() {
     if (state.isGameOver || state.isRunningTests) return;
     state.isRunningTests = true;
@@ -1562,9 +1475,6 @@
     }, 1100);
   }
 
-  // ================================================================
-  // PR SUBMISSION ENGINE
-  // ================================================================
   function openPRModal() {
     if (state.isGameOver) return;
     var modal = $('#pr-modal');
@@ -1675,9 +1585,6 @@
     }, 1500);
   }
 
-  // ================================================================
-  // GAME TIMERS
-  // ================================================================
   var timerInterval = null;
   var patienceDecayInterval = null;
   var interruptTimer = null;
@@ -1727,9 +1634,6 @@
     }, 45000);
   }
 
-  // ================================================================
-  // PRESENTATION DEMO MODAL CONTROLS
-  // ================================================================
   function openDemoModal() {
     var modal = $('#demo-modal');
     if (modal) {
@@ -1795,14 +1699,10 @@
     closeDemoModal();
   }
 
-  // ================================================================
-  // AUTOMATED PRE-FLIGHT DIAGNOSTIC & SELF-TEST RUNNER
-  // ================================================================
   function runGreenroomAudit() {
     var results = [];
     var allPassed = true;
 
-    // Check 1: Navigation & Tab Switching
     try {
       var tabs = ['inbox', 'chat', 'workspace', 'eval'];
       var originalTab = state.activeTab;
@@ -1841,7 +1741,6 @@
       results.push({ name: 'Navigation & Tab Switching: FAIL', detail: e.message, pass: false });
     }
 
-    // Check 2: Chat Dispatch & Vikram Reactive Replies
     try {
       var hasMessages = state.chatMessages && state.chatMessages.length >= 3;
       var hasDispatcher = typeof sendChatMessage === 'function';
@@ -1867,7 +1766,6 @@
       results.push({ name: 'Chat Dispatch & Vikram Reactive Replies: FAIL', detail: e.message, pass: false });
     }
 
-    // Check 3: Diff Workspace & Assertion Engine
     try {
       var tempState = state.editorContent;
       state.editorContent = ORIGINAL_CODE;
@@ -1903,7 +1801,6 @@
       results.push({ name: 'Diff Workspace & Assertion Engine: FAIL', detail: e.message, pass: false });
     }
 
-    // Check 4: Manager Evaluation Telemetry & Debrief Modal
     try {
       var m = state.evalMetrics;
       var hasMetrics = typeof m.technicalAccuracy === 'number' &&
@@ -1933,7 +1830,6 @@
       results.push({ name: 'Manager Evaluation Telemetry & Debrief Modal: FAIL', detail: e.message, pass: false });
     }
 
-    // Check 5: Offline Safety & Zero External CDN Dependencies
     try {
       var scripts = Array.from($$('script'));
       var externalScripts = scripts.filter(function (s) {
@@ -2020,11 +1916,7 @@
     if (modal) modal.classList.remove('visible');
   }
 
-  // ================================================================
-  // KEYBOARD SHORTCUTS ENGINE (HACKATHON DEMO MODE)
-  // ================================================================
   function handleGlobalKeyDown(e) {
-    // Only capture Ctrl + Shift + [0, 1, 2, 3, 4]
     if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
       if (e.key === '0' || e.code === 'Digit0') {
         e.preventDefault();
@@ -2045,33 +1937,25 @@
     }
   }
 
-  // ================================================================
-  // EVENT BINDINGS
-  // ================================================================
   function bindEvents() {
-    // Audio unlock on first user click anywhere
     document.addEventListener('click', function () {
       getAudioContext();
     }, { once: true });
 
-    // Global Demo Mode Keyboard Shortcuts
     window.addEventListener('keydown', handleGlobalKeyDown);
 
-    // Sidebar tab buttons
     $$('.nav-tab-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         switchTab(btn.dataset.tab);
       });
     });
 
-    // Chat: Standard Response Chips
     $$('.response-chip').forEach(function (chip) {
       chip.addEventListener('click', function () {
         sendChatMessage(chip.dataset.message);
       });
     });
 
-    // Chat: Text input & dispatch
     var chatInput = $('#chat-input');
     var dispatchBtn = $('#btn-chat-dispatch');
 
@@ -2090,7 +1974,6 @@
       });
     }
 
-    // Workspace: View Staging Server Logs
     var viewLogsBtn = $('#btn-view-staging-logs');
     if (viewLogsBtn) {
       viewLogsBtn.addEventListener('click', function () {
@@ -2104,7 +1987,6 @@
     var logsDismiss = $('#staging-logs-dismiss');
     if (logsDismiss) logsDismiss.addEventListener('click', closeStagingLogsModal);
 
-    // Workspace: Toggle Diff Highlighter
     var toggleDiffBtn = $('#btn-toggle-diff');
     if (toggleDiffBtn) {
       toggleDiffBtn.addEventListener('click', function () {
@@ -2112,7 +1994,6 @@
       });
     }
 
-    // Workspace: Load recommended patch
     var loadPatchBtn = $('#btn-load-patch');
     if (loadPatchBtn) {
       loadPatchBtn.addEventListener('click', function () {
@@ -2130,7 +2011,6 @@
       });
     }
 
-    // Workspace: Reset to flawed
     var resetBtn = $('#btn-reset-flawed');
     if (resetBtn) {
       resetBtn.addEventListener('click', function () {
@@ -2148,7 +2028,6 @@
       });
     }
 
-    // Workspace: Run tests
     var runTestsBtn = $('#btn-run-tests');
     if (runTestsBtn) {
       runTestsBtn.addEventListener('click', function () {
@@ -2156,7 +2035,6 @@
       });
     }
 
-    // Workspace: Submit PR
     var submitPRBtn = $('#btn-submit-pr');
     if (submitPRBtn) {
       submitPRBtn.addEventListener('click', function () {
@@ -2164,7 +2042,6 @@
       });
     }
 
-    // Modal: PR
     var modalClose = $('#modal-close-btn');
     if (modalClose) modalClose.addEventListener('click', closePRModal);
 
@@ -2174,7 +2051,6 @@
     var modalConfirm = $('#modal-confirm-btn');
     if (modalConfirm) modalConfirm.addEventListener('click', confirmSubmitPR);
 
-    // Modal: Debrief Actions
     var debriefClose = $('#debrief-close-btn');
     if (debriefClose) debriefClose.addEventListener('click', closeDebriefModal);
 
@@ -2184,7 +2060,6 @@
     var debriefRestart = $('#debrief-restart');
     if (debriefRestart) debriefRestart.addEventListener('click', restartScenario);
 
-    // Modal: Escalation Actions
     var escClose = $('#escalation-close-btn');
     if (escClose) escClose.addEventListener('click', closeEscalationModal);
 
@@ -2199,7 +2074,6 @@
     var escRestart = $('#btn-escalation-restart');
     if (escRestart) escRestart.addEventListener('click', restartScenario);
 
-    // Modal: Demo Controls
     var demoMenuBtn = $('#btn-demo-menu');
     if (demoMenuBtn) demoMenuBtn.addEventListener('click', openDemoModal);
 
@@ -2221,7 +2095,6 @@
     var demoDebrief = $('#demo-act-debrief');
     if (demoDebrief) demoDebrief.addEventListener('click', demoActionOpenDebrief);
 
-    // Modal: Diagnostic Controls
     var diagClose = $('#diagnostic-close-btn');
     if (diagClose) diagClose.addEventListener('click', closeDiagnosticModal);
 
@@ -2239,7 +2112,6 @@
       });
     }
 
-    // Quick-reply chips multi-click debounce protection
     $$('.response-chip').forEach(function (chip) {
       chip.addEventListener('click', function () {
         chip.style.pointerEvents = 'none';
@@ -2249,7 +2121,6 @@
       });
     });
 
-    // Editor textarea: Handle Tab key and input sync
     var editorTA = $('#intern-editor');
     if (editorTA) {
       editorTA.addEventListener('keydown', function (e) {
@@ -2281,19 +2152,27 @@
     }
   }
 
-  // ================================================================
-  // INITIALIZATION / BOOT
-  // ================================================================
   function boot() {
     var editor = $('#intern-editor');
     if (editor) editor.value = ORIGINAL_CODE;
+
+    var hostLabel = $('#runtime-host-label');
+    if (hostLabel && window.location) {
+      var hostname = window.location.hostname;
+      if (hostname && (hostname.indexOf('render.com') !== -1 || hostname.indexOf('onrender.com') !== -1)) {
+        hostLabel.textContent = 'RENDER CLUSTER // LIVE WEB SERVICE';
+      } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        hostLabel.textContent = 'LOCALHOST:' + (window.location.port || '10000') + ' // LIVE SERVER';
+      } else if (window.location.protocol === 'file:') {
+        hostLabel.textContent = 'LOCAL FILE // STANDALONE';
+      }
+    }
 
     bindEvents();
     render();
     startTimers();
   }
 
-  // Expose engine on window for telemetry inspection & demo tooling
   window.GreenroomEngine = {
     state: state,
     render: render,
@@ -2318,7 +2197,6 @@
     demoActionOpenDebrief: demoActionOpenDebrief
   };
 
-  // Direct global alias for audit
   window.runGreenroomAudit = runGreenroomAudit;
 
   if (document.readyState === 'loading') {

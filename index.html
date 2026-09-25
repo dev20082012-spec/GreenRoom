@@ -1,23 +1,27 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ApexCore Systems // Intern Sandbox (Greenroom)</title>
-  <meta name="description" content="Greenroom Phase 2 - Interactive workplace apprenticeship simulator. Simulated corporate work pressure, code review, and manager interactions for engineering apprentices.">
-  <link rel="stylesheet" href="styles.css">
+
+<meta name="description" content="Greenroom — Real-World Apprentice Simulator. Closing the graduate-to-workplace skills gap through simulated corporate pressure, live manager agents, and real codebase hotfixes.">
+  <meta name="theme-color" content="#122B1E">
+  <meta property="og:title" content="ApexCore Systems // Intern Sandbox (Greenroom)">
+  <meta property="og:description" content="Greenroom — Real-World Apprentice Simulator. Closing the graduate-to-workplace skills gap through simulated corporate pressure, live manager agents, and real codebase hotfixes.">
+  <meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%23122B1E'/%3E%3Ctext x='12' y='17' font-family='monospace' font-weight='900' font-size='15' fill='%23D97706' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <div id="app-shell">
 
-    <!-- ============================================================ -->
-    <!-- ZONE 1: TOP GLOBAL NAVIGATION BAR                            -->
-    <!-- ============================================================ -->
-    <header id="top-nav">
+<header id="top-nav">
 
-      <!-- Left: Brand -->
-      <div class="nav-brand">
+<div class="nav-brand">
         <div class="nav-brand-icon">A</div>
         <div class="nav-brand-text">
           <span class="nav-brand-title">ApexCore Systems // Intern Sandbox (Greenroom)</span>
@@ -25,8 +29,7 @@
         </div>
       </div>
 
-      <!-- Center: Ticket Info -->
-      <div class="nav-center">
+<div class="nav-center">
         <span class="ticket-id">TICKET: APX-104</span>
         <span class="separator">|</span>
         <span class="severity">SEVERITY: P0 BLOCKER</span>
@@ -34,8 +37,7 @@
         <span class="status-text" id="ticket-status">IN PROGRESS</span>
       </div>
 
-      <!-- Right: Status Badges -->
-      <div class="nav-right">
+<div class="nav-right">
         <div class="badge-box">Phase: <span class="value">Sprint 1</span></div>
 
         <div class="timer-box">
@@ -56,18 +58,12 @@
 
     </header>
 
-    <!-- ============================================================ -->
-    <!-- MAIN CONTAINER: SIDEBAR + WORKSPACE                          -->
-    <!-- ============================================================ -->
-    <div id="main-container">
+<div id="main-container">
 
-      <!-- ============================================================ -->
-      <!-- ZONE 2: LEFT SIDEBAR / ACTIVITY RAIL                         -->
-      <!-- ============================================================ -->
-      <aside id="sidebar">
+<aside id="sidebar">
 
         <div>
-          <!-- Apprentice Profile -->
+          
           <div class="sidebar-profile">
             <div class="label">Assigned Apprentice</div>
             <div class="name">Alex Chen</div>
@@ -79,8 +75,7 @@
 
           <div class="sidebar-section-label">Apprenticeship Console</div>
 
-          <!-- Tab Navigation -->
-          <nav>
+<nav>
             <button class="nav-tab-btn" data-tab="inbox" id="tab-btn-inbox">
               <span class="tab-left">
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -133,10 +128,9 @@
           </nav>
         </div>
 
-        <!-- Sidebar Footer -->
-        <div class="sidebar-footer">
-          <div>ENVIRONMENT: STAGING-EAST</div>
-          <div>NODE VER: 20.12.0 // STRICT</div>
+<div class="sidebar-footer">
+          <div>HOST: <span id="runtime-host-label">RENDER CLUSTER // LIVE WEB SERVICE</span></div>
+          <div>NODE VER: 20.12.0 // STRICT RUNTIME</div>
           <div class="status-line">Status: <span id="sidebar-status-text">HOTFIX IN PROGRESS</span></div>
           <div class="demo-hints">
             <span class="demo-tag" id="demo-tag-label">[DEMO SHORTCUTS]</span>
@@ -148,18 +142,11 @@
 
       </aside>
 
-      <!-- ============================================================ -->
-      <!-- ZONE 3: MAIN WORKSPACE                                       -->
-      <!-- ============================================================ -->
-      <div id="workspace">
+<div id="workspace">
 
-        <!-- ========================================================== -->
-        <!-- TAB A: TEAM CHAT                                            -->
-        <!-- ========================================================== -->
-        <div class="tab-panel active" id="panel-chat">
+<div class="tab-panel active" id="panel-chat">
 
-          <!-- Chat Header -->
-          <div class="chat-header">
+<div class="chat-header">
             <div class="chat-header-left">
               <div class="chat-avatar">VM</div>
               <div class="chat-header-info">
@@ -176,19 +163,16 @@
             <div class="chat-header-right">CHANNEL: #auth-core-incidents</div>
           </div>
 
-          <!-- Chat Message Feed -->
-          <div class="chat-feed" id="chat-feed">
-            <!-- Rendered by app.js -->
+<div class="chat-feed" id="chat-feed">
+            
           </div>
 
-          <!-- Typing Indicator -->
-          <div class="typing-indicator" id="typing-indicator">
+<div class="typing-indicator" id="typing-indicator">
             <span class="pulse-dot"></span>
             <span>Vikram Malhotra is typing reply...</span>
           </div>
 
-          <!-- Input Area -->
-          <div class="chat-input-area">
+<div class="chat-input-area">
             <div class="chips-label">Standard Apprenticeship Status Updates (Quick Dispatch):</div>
             <div class="chips-row" id="chips-row">
               <button class="response-chip" data-message="Drafting the PR now">"Drafting the PR now"</button>
@@ -207,38 +191,29 @@
 
         </div>
 
-        <!-- ========================================================== -->
-        <!-- TAB B: CORPORATE INBOX                                      -->
-        <!-- ========================================================== -->
-        <div class="tab-panel" id="panel-inbox">
+<div class="tab-panel" id="panel-inbox">
           <div class="inbox-container">
 
-            <!-- Email List -->
-            <div class="inbox-list">
+<div class="inbox-list">
               <div class="inbox-list-header">
                 <span class="title">INBOX FOLDER</span>
                 <span class="count">3 messages</span>
               </div>
               <div class="inbox-list-items" id="inbox-items">
-                <!-- Rendered by app.js -->
+                
               </div>
             </div>
 
-            <!-- Email Detail Pane -->
-            <div class="email-detail" id="email-detail-content">
-              <!-- Rendered by app.js -->
+<div class="email-detail" id="email-detail-content">
+              
             </div>
 
           </div>
         </div>
 
-        <!-- ========================================================== -->
-        <!-- TAB C: TASK WORKSPACE & CODE DIFF                           -->
-        <!-- ========================================================== -->
-        <div class="tab-panel" id="panel-workspace">
+<div class="tab-panel" id="panel-workspace">
 
-          <!-- Workspace Toolbar -->
-          <div class="workspace-toolbar">
+<div class="workspace-toolbar">
             <div class="workspace-toolbar-left">
               <span class="ticket-label">TASK APX-104:</span>
               <span class="file-path">/src/middleware/auth.js</span>
@@ -252,25 +227,22 @@
             </div>
           </div>
 
-          <!-- Split Editor -->
-          <div class="editor-split">
+<div class="editor-split">
 
-            <!-- Left Pane: Original Code (Read-Only) -->
-            <div class="editor-pane">
+<div class="editor-pane">
               <div class="editor-pane-header">
                 <span>ORIGINAL CODE (VULNERABLE)</span>
                 <span class="status-vulnerable">[VULNERABLE]</span>
               </div>
               <div class="editor-code-display" id="original-code-display">
-                <!-- Rendered by app.js with line numbers -->
+                
               </div>
               <div class="editor-pane-footer">
                 <span class="defect-note">DEFECT: Unhandled TypeError if req.headers['authorization'] is undefined.</span>
               </div>
             </div>
 
-            <!-- Right Pane: Intern Editor (Editable) -->
-            <div class="editor-pane">
+<div class="editor-pane">
               <div class="editor-pane-header">
                 <span>YOUR HOTFIX (EDITABLE)</span>
                 <span class="status-working">[WORKING COPY]</span>
@@ -287,8 +259,7 @@
 
           </div>
 
-          <!-- Test Console -->
-          <div class="test-console">
+<div class="test-console">
             <div class="test-console-header">
               <div class="suite-info">
                 <span class="suite-label">TEST SUITE RUNNER:</span>
@@ -300,20 +271,16 @@
               </div>
             </div>
             <div class="test-output" id="test-output">
-              <!-- Rendered by app.js -->
+              
             </div>
           </div>
 
         </div>
 
-        <!-- ========================================================== -->
-        <!-- TAB D: MANAGER EVALUATION LOG                               -->
-        <!-- ========================================================== -->
-        <div class="tab-panel" id="panel-eval">
+<div class="tab-panel" id="panel-eval">
           <div class="eval-container">
 
-            <!-- Scorecard -->
-            <div class="eval-scorecard">
+<div class="eval-scorecard">
               <div class="eval-scorecard-header">
                 <div>
                   <div class="section-label">PERFORMANCE TELEMETRY DASHBOARD</div>
@@ -332,8 +299,7 @@
 
               <div class="eval-grid">
 
-                <!-- Criterion 1: Technical Rigor & Null Safety -->
-                <div class="eval-criterion">
+<div class="eval-criterion">
                   <div class="eval-criterion-header">
                     <span class="criterion-name">1. Technical Rigor & Null-Safety</span>
                     <span class="criterion-value" id="eval-tech-value">80%</span>
@@ -344,8 +310,7 @@
                   <div class="eval-criterion-note">Evaluates PR handling of undefined/null headers, clean early returns vs messy try-catch.</div>
                 </div>
 
-                <!-- Criterion 2: Professional Communication -->
-                <div class="eval-criterion">
+<div class="eval-criterion">
                   <div class="eval-criterion-header">
                     <span class="criterion-name">2. Professional Communication</span>
                     <span class="criterion-value" id="eval-response-value">65%</span>
@@ -356,8 +321,7 @@
                   <div class="eval-criterion-note">Response time to Vikram's pings, usage of enterprise status chips, concise status dispatch.</div>
                 </div>
 
-                <!-- Criterion 3: Production Urgency & SLA -->
-                <div class="eval-criterion">
+<div class="eval-criterion">
                   <div class="eval-criterion-header">
                     <span class="criterion-name">3. Production Urgency & SLA</span>
                     <span class="criterion-value" id="eval-communication-value">90%</span>
@@ -368,8 +332,7 @@
                   <div class="eval-criterion-note">Tracks speed from ticket intake to PR submission, SLA compliance under P0 severity.</div>
                 </div>
 
-                <!-- Criterion 4: Code Cleanliness & Security -->
-                <div class="eval-criterion">
+<div class="eval-criterion">
                   <div class="eval-criterion-header">
                     <span class="criterion-name">4. Code Cleanliness & Security</span>
                     <span class="criterion-value" id="eval-autonomy-value">70%</span>
@@ -383,16 +346,14 @@
               </div>
             </div>
 
-            <!-- Audit Trail -->
-            <div class="audit-trail">
+<div class="audit-trail">
               <div class="audit-trail-header">LIVE SUPERVISOR AUDIT FEED // SPRINT 1</div>
               <div id="audit-trail-entries">
-                <!-- Rendered by app.js -->
+                
               </div>
             </div>
 
-            <!-- Supervisor Note -->
-            <div class="supervisor-note">
+<div class="supervisor-note">
               <div class="note-header">OFFICIAL SUPERVISOR NOTE:</div>
               <div class="note-body">"Alex shows solid core fundamentals. In enterprise production, defensive edge-case handling on unverified inputs is non-negotiable. P0 incidents require swift, concise status dispatches and verifiable test diffs."</div>
               <div class="note-attribution">- Vikram Malhotra, Lead Architect & Systems Mentor (ApexCore Systems)</div>
@@ -405,10 +366,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- PR SUBMISSION MODAL                                            -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay" id="pr-modal">
+<div class="modal-overlay" id="pr-modal">
     <div class="modal-dialog">
 
       <div class="modal-header">
@@ -442,17 +400,14 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- STAGING LOGS MODAL                                             -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay staging-logs-modal" id="staging-logs-modal">
+<div class="modal-overlay staging-logs-modal" id="staging-logs-modal">
     <div class="modal-dialog">
       <div class="modal-header">
         <span class="title">STAGING SERVER LOGS // US-EAST-1 AUTH GATEWAY</span>
         <button class="modal-close" id="staging-logs-close">[CLOSE]</button>
       </div>
       <div class="staging-logs-body" id="staging-logs-body">
-        <!-- Rendered by app.js -->
+        
       </div>
       <div class="modal-actions">
         <button class="btn-modal-cancel" id="staging-logs-dismiss">DISMISS</button>
@@ -460,10 +415,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- SPRINT DEBRIEF MODAL                                           -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay debrief-modal" id="debrief-modal">
+<div class="modal-overlay debrief-modal" id="debrief-modal">
     <div class="modal-dialog">
       <div class="modal-header" style="justify-content: flex-end; padding: 2px 6px; border-bottom: none; margin-bottom: -10px;">
         <button class="modal-close" id="debrief-close-btn">[CLOSE]</button>
@@ -475,17 +427,17 @@
       </div>
 
       <div class="debrief-grade-box" id="debrief-grade-box">
-        <!-- Rendered by app.js -->
+        
       </div>
 
       <div class="debrief-section" id="debrief-metrics">
         <div class="section-title">Performance Metrics Breakdown</div>
-        <!-- Rendered by app.js -->
+        
       </div>
 
       <div class="debrief-section" id="debrief-findings">
         <div class="section-title">Strengths & Vulnerabilities Assessment</div>
-        <!-- Rendered by app.js -->
+        
       </div>
 
       <div class="debrief-actions">
@@ -495,10 +447,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- INCIDENT ESCALATION MODAL (PATIENCE DEPLETED)               -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay escalation-modal" id="escalation-modal">
+<div class="modal-overlay escalation-modal" id="escalation-modal">
     <div class="modal-dialog">
       <div class="modal-header">
         <span class="title">INCIDENT ESCALATION // SUPERVISOR INTERVENTION</span>
@@ -524,10 +473,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- PRESENTATION CONTROLS (HACKATHON DEMO MODAL)                -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay demo-modal" id="demo-modal">
+<div class="modal-overlay demo-modal" id="demo-modal">
     <div class="modal-dialog" style="max-width: 560px;">
       <div class="modal-header">
         <span class="title">HACKATHON PRESENTATION TOOLING // DEMO CONTROLS</span>
@@ -554,10 +500,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- PRE-FLIGHT DIAGNOSTIC HUD MODAL (Ctrl + Shift + 0)          -->
-  <!-- ============================================================ -->
-  <div class="modal-overlay diagnostic-modal" id="diagnostic-modal">
+<div class="modal-overlay diagnostic-modal" id="diagnostic-modal">
     <div class="modal-dialog" style="max-width: 640px;">
       <div class="modal-header">
         <span class="title">APEXCORE PRE-FLIGHT DIAGNOSTIC & SELF-TEST RUNNER</span>
@@ -569,7 +512,7 @@
           <span class="diag-status-badge pass" id="diag-summary-badge">[HEALTH: 100%]</span>
         </div>
         <div class="diagnostic-checklist" id="diagnostic-checklist">
-          <!-- Populated dynamically by runGreenroomAudit() -->
+          
         </div>
         <div class="diagnostic-banner" id="diagnostic-banner">
           APEXCORE SANDBOX ENGINE HEALTH: 100% // READY FOR HORIZON DEMO
@@ -582,11 +525,9 @@
     </div>
   </div>
 
-  <!-- Toast Container -->
-  <div class="toast-container" id="toast-container"></div>
+<div class="toast-container" id="toast-container"></div>
 
-  <!-- Engine -->
-  <script src="app.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>

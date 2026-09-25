@@ -1,0 +1,24 @@
+{
+  "name": "greenroom-apprentice-simulator",
+  "version": "1.0.0",
+  "description": "Greenroom - Interactive workplace apprenticeship simulator for Horizon Hackathon",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "greenroom",
+    "simulator",
+    "apprenticeship",
+    "hackathon",
+    "render",
+    "web-service"
+  ],
+  "author": "ApexCore Systems",
+  "license": "MIT"
+}
